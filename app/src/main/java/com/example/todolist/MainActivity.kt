@@ -2,10 +2,30 @@ package com.example.todolist
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
+import com.example.todolist.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var taskViewModel: TaskViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        taskViewModel = ViewModelProvider(this)[TaskViewModel::class.java]
+        binding.newTaskButton.setOnClickListener{
+            NewTaskSheet().show(supportFragmentManager, "NewTaskTag")
+        }
+
+        taskViewModel.name.observe(this){
+            binding.taskName.text = String.format("Task Name: %s", it)
+        }
+
+        taskViewModel.desc.observe(this){
+            binding.taskDesc.text = String.format("Task Desc: %s", it)
+        }
     }
 }
+
