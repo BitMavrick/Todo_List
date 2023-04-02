@@ -8,7 +8,6 @@ import com.example.todolist.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), TaskItemClickListener
 {
-
     private lateinit var binding: ActivityMainBinding
     private lateinit var taskViewModel: TaskViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,9 +19,7 @@ class MainActivity : AppCompatActivity(), TaskItemClickListener
         binding.newTaskButton.setOnClickListener{
             NewTaskSheet(null).show(supportFragmentManager, "NewTaskTag")
         }
-
         setRecyclerView()
-
     }
 
     private fun setRecyclerView(){
@@ -34,8 +31,6 @@ class MainActivity : AppCompatActivity(), TaskItemClickListener
 
             }
         }
-
-
     }
 
     override fun editTaskItem(taskItem: TaskItem) {
