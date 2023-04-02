@@ -18,7 +18,7 @@ class TaskViewModel: ViewModel() {
         list!!.add(newTask)
         taskItems.postValue(list)
     }
-
+/*
     fun updateTaskItem(id: UUID, name: String, desc: String, dueTime: LocalTime?){
         val list = taskItems.value
         val task = list!!.find{it.id == id}!!
@@ -28,13 +28,21 @@ class TaskViewModel: ViewModel() {
         task.dueTime = dueTime
         taskItems.postValue(list)
     }
+*/
 
+/*
     fun setCompleted(taskItem: TaskItem){
         val list = taskItems.value
         val task = list!!.find{it.id == taskItem.id}!!
         if(task.completeDate == null)
             task.completeDate = LocalDate.now()
         taskItems.postValue(list)
+    }
+
+ */
+
+    fun updateTaskItem(id: TaskItem) {
+
     }
 
 }
