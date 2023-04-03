@@ -3,11 +3,9 @@ package com.example.todolist
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import java.time.LocalDate
-import java.time.LocalTime
-import java.util.UUID
 
 class TaskViewModel(private val repository: TaskItemRepository): ViewModel() {
-    var askItems: LiveData<List<TaskItem>> = repository.allTaskItems.asLiveData()
+    var taskItems: LiveData<List<TaskItem>> = repository.allTaskItems.asLiveData()
 
     fun addTaskItem(newTask: TaskItem) = viewModelScope.launch {
         repository.insertTaskItem(newTask)
@@ -25,7 +23,14 @@ class TaskViewModel(private val repository: TaskItemRepository): ViewModel() {
     }
 }
 
-// Duration: 10:54
+class TaskItemModelFactory(private val repository: TaskItemRepository): ViewModelProvider.Factory{
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if(modelClass.isAssignableFrom(TaskViewModel::class.java))
+            return TaskViewModel(repository) as T
+
+        throw IllegalArgumentException("Unknown class for view model")
+    }
+}
 
 
 

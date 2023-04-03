@@ -8,7 +8,6 @@ import androidx.room.PrimaryKey
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-import java.util.UUID
 
 @Entity(tableName = "task_item_table")
 class TaskItem(
@@ -18,7 +17,7 @@ class TaskItem(
     @ColumnInfo(name = "completedDataString") var completedDateString: String?,
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 ) {
-    fun completedDate(): LocalDate? = if(completedDateString == null) null
+    private fun completedDate(): LocalDate? = if(completedDateString == null) null
         else LocalDate.parse(completedDateString, dateFormatter)
 
     fun dueTime(): LocalTime? = if(dueTimeString == null) null
